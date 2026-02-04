@@ -72,6 +72,7 @@ body {
 html {
     overflow-x: hidden;
     scroll-behavior: smooth;
+    scroll-padding-top: 2rem;
 }
 
 /* html scroll-behavior already set above */
@@ -1098,6 +1099,7 @@ img {
         gap: 0.5rem;
     }
 }
+
 /* ===== Persistent CTA ===== */
 .persistent-cta {
     position: fixed;
@@ -1114,6 +1116,13 @@ img {
     transition: all var(--transition-normal);
     opacity: 1;
     visibility: visible;
+}
+
+.persistent-cta.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    pointer-events: none;
 }
 
 .persistent-cta:hover {

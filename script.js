@@ -252,15 +252,36 @@ pillarNavItems.forEach((item, index) => {
 
 window.addEventListener('scroll', () => {
     requestAnimationFrame(updatePillars);
+    requestAnimationFrame(updateCtaVisibility);
 
     // Persistent CTA is now always visible via CSS
 });
+
+// ===== Persistent CTA Visibility =====
+const persistentCta = document.querySelector('.persistent-cta');
+const footer = document.querySelector('.footer');
+
+function updateCtaVisibility() {
+    if (!persistentCta || !footer) return;
+
+    const footerRect = footer.getBoundingClientRect();
+    const threshold = 100; // Pixels from footer before hiding
+
+    if (footerRect.top <= window.innerHeight + threshold) {
+        persistentCta.classList.add('hidden');
+    } else {
+        persistentCta.classList.remove('hidden');
+    }
+}
 
 // ===== Smooth Scroll =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+
+        const target = document.querySelector(targetId);
         if (target) {
             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
