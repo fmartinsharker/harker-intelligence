@@ -127,7 +127,7 @@ function updateDramaticSync() {
     // progress: starts at 0 from the very top of the site (scrollY = 0)
     // and reaches 1 as we move into the dramatic section
     const scrollY = window.scrollY;
-    const animationDistance = 3000; // Complete reveal over first 3000px of scroll
+    const animationDistance = 1500; // Complete reveal over first 1500px of scroll
     let progress = scrollY / animationDistance;
     progress = Math.max(0, Math.min(1, progress));
 
@@ -159,13 +159,15 @@ function updateDramaticSync() {
         heroContent.style.opacity = 1 - heroContentFadeProgress;
     }
 
-    // Once progress > 0.9, reveal the follow-up details
+    // Once progress > 0.9, reveal the follow-up details and activate glow
     const details = document.querySelector('.dramatic-details-reveal');
     if (details) {
-        if (progress > 0.8) {
+        if (progress > 0.9) {
             details.classList.add('active');
+            dramaticTitle.classList.add('active'); // Trigger neon glow
         } else {
             details.classList.remove('active');
+            dramaticTitle.classList.remove('active');
         }
     }
 }
@@ -259,7 +261,7 @@ window.addEventListener('scroll', () => {
 
 // ===== Persistent CTA Visibility =====
 const persistentCta = document.querySelector('.persistent-cta');
-const footer = document.querySelector('.footer');
+const footer = document.querySelector('.footer-giant');
 
 function updateCtaVisibility() {
     if (!persistentCta || !footer) return;

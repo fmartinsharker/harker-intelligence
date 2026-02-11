@@ -209,8 +209,8 @@ img {
 
 /* ===== Dramatic Section (Like "Until Now") ===== */
 .section--dramatic {
-    height: 5000px;
-    /* Extremely high for super-slow reveal */
+    height: 2500px;
+    /* Reduced for faster, more dynamic reveal */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -222,16 +222,20 @@ img {
 
 .dramatic-mask {
     position: sticky;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 0;
     width: 100%;
+    height: 100vh;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     overflow: visible;
-    /* Let the 3D rotation breathe */
+    /* Removed translateY(-50%) to rely on flexbox within 100vh */
 }
 
 .dramatic-scroll-area {
+    position: relative;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -246,28 +250,53 @@ img {
     line-height: 0.9;
     letter-spacing: -0.04em;
     color: var(--color-text);
-    margin-bottom: var(--space-xl);
+    margin: 0;
+    /* Removed margin-bottom to center in flex */
 
     /* Initial 3D state - Start HUGE and tilted */
     opacity: 0;
     transform: translateY(100px) rotateX(40deg) scale(1.6);
-    transform-origin: center bottom;
+    transform-origin: center center;
     transition: none;
     /* Controlled by JS scroll sync */
 }
 
-.dramatic-details-reveal {
+.dramatic-title.active {
+    animation: neonGlowPulse 3s infinite alternate ease-in-out;
+}
+
+@keyframes neonGlowPulse {
+    from {
+        text-shadow: 0 0 10px rgba(0, 153, 74, 0.4),
+            0 0 20px rgba(0, 153, 74, 0.2);
+    }
+
+    to {
+        text-shadow: 0 0 20px rgba(0, 153, 74, 0.9),
+            0 0 40px rgba(0, 153, 74, 0.6),
+            0 0 70px rgba(0, 153, 74, 0.4);
+    }
+}
+
+/* High specificity to prevent .reveal overrides */
+section.section--dramatic .dramatic-details-reveal {
+    position: absolute;
+    top: 100%;
+    left: 50% !important;
+    transform: translateX(-50%) translateY(40px) !important;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    text-align: center;
     opacity: 0;
-    transform: translateY(30px);
     transition: all 1s ease;
+    width: 300px;
 }
 
-.dramatic-details-reveal.active {
+section.section--dramatic .dramatic-details-reveal.active {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(10px) !important;
 }
 
 .dramatic-subtitle {
@@ -276,35 +305,7 @@ img {
     letter-spacing: 0.25rem;
     color: var(--color-text-muted);
     text-transform: uppercase;
-    margin-bottom: var(--space-lg);
-}
-
-.play-button {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    border: 1px solid var(--color-text);
-    background: transparent;
-    color: var(--color-text);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all var(--transition-normal);
     margin-bottom: var(--space-xl);
-}
-
-.play-button svg {
-    width: 28px;
-    height: 28px;
-    margin-left: 6px;
-}
-
-.play-button:hover {
-    background: var(--color-primary);
-    border-color: var(--color-primary);
-    color: #fff;
-    transform: scale(1.1);
 }
 
 .vertical-line {
@@ -836,6 +837,29 @@ img {
     margin-bottom: var(--space-md);
 }
 
+.service-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: var(--space-lg);
+}
+
+.service-links-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-subtle);
+    margin-bottom: 0.25rem;
+}
+
+.service-links a {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text);
+    width: fit-content;
+}
+
 .service-image {
     margin-top: auto;
     border-radius: var(--border-radius);
@@ -1009,61 +1033,183 @@ img {
     box-shadow: 0 10px 50px rgba(0, 153, 74, 0.4);
 }
 
-/* ===== Footer ===== */
-.footer {
-    padding: var(--space-lg) var(--space-md);
+/* ===== Giant Word Footer ===== */
+.footer-giant {
+    padding: var(--space-2xl) var(--space-md) var(--space-lg);
     background: var(--color-bg);
     border-top: 1px solid var(--color-border);
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-.footer-content {
+.footer-giant .container {
+    max-width: none;
+    width: 100%;
+    flex: 1;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: var(--space-md);
-    margin-bottom: var(--space-md);
 }
 
-.footer-logo {
-    height: 36px;
-    opacity: 0.6;
-    transition: opacity var(--transition-normal);
+/* Top: Minimalist links */
+.footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: var(--space-xl);
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto var(--space-xl) !important;
+    align-items: flex-start;
 }
 
-:root:not([data-theme]) .footer-logo {
-    filter: grayscale(100%) brightness(2);
+.footer-statement {
+    min-width: 250px;
 }
 
-[data-theme="light"] .footer-logo {
-    filter: none;
-}
-
-.footer-logo:hover {
-    opacity: 1;
-    filter: none !important;
-}
-
-.footer-info {
+.footer-nav-col {
     display: flex;
-    gap: var(--space-md);
-    flex-wrap: wrap;
-    font-size: 0.875rem;
+    flex-direction: column;
 }
 
-.footer-info a {
+.footer-nav-col:first-of-type {
+    align-items: center;
+    text-align: center;
+}
+
+.footer-nav-col:last-of-type {
+    align-items: flex-end;
+    text-align: right;
+}
+
+.footer-substatement {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: -0.5rem;
+    color: var(--color-text);
+}
+
+.footer-mini-heading {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-subtle);
+    margin-bottom: var(--space-sm);
+}
+
+.footer-mini-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.footer-mini-links a {
+    font-size: 0.9rem;
     color: var(--color-text-muted);
     transition: color var(--transition-fast);
 }
 
-.footer-info a:hover {
+.footer-mini-links a:hover {
     color: var(--color-primary);
 }
 
-.footer-copyright {
+/* Middle: The Giant Logo */
+.footer-middle {
+    margin: var(--space-lg) 0;
     text-align: center;
-    color: var(--color-text-subtle);
+}
+
+.giant-logo-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    opacity: 1;
+    /* Match the style of the giant word */
+}
+
+.giant-logo {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    filter: brightness(1.2);
+    transition: transform var(--transition-slow);
+}
+
+.giant-logo:hover {
+    transform: scale(1.02);
+}
+
+[data-theme="light"] .giant-logo {
+    filter: brightness(0.1);
+    /* Make it dark for light theme */
+}
+
+/* Bottom: Legal + Brand */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-border);
+    flex-wrap: wrap;
+    gap: var(--space-md);
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footer-mini-logo {
+    height: 24px;
+    opacity: 0.8;
+}
+
+.footer-copyright-text {
     font-size: 0.75rem;
+    color: var(--color-text-subtle);
+}
+
+.footer-legal-links {
+    display: flex;
+    gap: var(--space-lg);
+}
+
+.footer-legal-links a {
+    font-size: 0.75rem;
+    color: var(--color-text-subtle);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .footer-top {
+        flex-direction: column;
+        gap: var(--space-xl);
+    }
+
+    .footer-statement,
+    .footer-nav-col {
+        flex-basis: 100%;
+    }
+
+    .giant-word {
+        font-size: 25vw;
+        letter-spacing: -0.04em;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-sm);
+    }
 }
 
 /* ===== Reveal Animation ===== */

@@ -116,28 +116,26 @@
     </header>
 
     <!-- Until Now Style Section (Harker Intelligence) -->
+    <!--
     <section class="section section--dramatic" id="dramatic">
         <div class="dramatic-mask">
             <div class="dramatic-scroll-area">
                 <h2 class="dramatic-title scroll-sync-text">
                     Harker<br>Intelligence
                 </h2>
+            -->
 
-                <!-- Subtitle + Play Button (Revealed at the end) -->
-                <div class="dramatic-details-reveal reveal" data-delay="300">
+    <!-- Subtitle + Play Button (Revealed at the end) -->
+    <!--   
+                <div class="dramatic-details-reveal">
                     <p class="dramatic-subtitle">Precision. Power. 360.</p>
-                    <button class="play-button" aria-label="Ver vídeo">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M8 5v14l11-7z" />
-                        </svg>
-                    </button>
                     <div class="vertical-line"></div>
                     <p class="dramatic-followup">O FUTURO DA INDÚSTRIA COMEÇA AGORA.</p>
                 </div>
             </div>
         </div>
     </section>
-
+-->
     <!-- Dynamic Intro Statement (Before Pillars) -->
     <section class="section section--statement" id="intro">
         <div class="statement-bg-text parallax" data-speed="-0.1">AMBITION</div>
@@ -229,6 +227,13 @@
                     <div class="service-number">01</div>
                     <h3>Retrofits</h3>
                     <p>Modernização inteligente.</p>
+                    <div class="service-links">
+                        <span class="service-links-label">Casos de Estudo:</span>
+                        <a href="case%20studys/retrofit%20extrusora.pdf" target="_blank"
+                            class="hover-underline">Retrofit Extrusora →</a>
+                        <a href="case%20studys/retrofit%20trefiladora.pdf" target="_blank"
+                            class="hover-underline">Retrofit Trefiladora →</a>
+                    </div>
                     <div class="service-image">
                         <img src="retrofits.jpg" alt="Retrofits" class="service-img-element">
                     </div>
@@ -291,18 +296,54 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
+    <!-- Giant Word Footer -->
+    <footer class="footer-giant">
         <div class="container">
-            <div class="footer-content">
-                <img src="HSI_versao_simples.svg" alt="Harker Intelligence" class="footer-logo">
-                <div class="footer-info">
-                    <a href="tel:+351229478520">+351 229 478 520</a>
-                    <a href="mailto:geral@harkersolutions.com">geral@harkersolutions.com</a>
-                    <a href="https://www.harkersolutions.com" target="_blank">harkersolutions.com</a>
+            <!-- Top Section: Minimalist Links -->
+            <div class="footer-top">
+                <div class="footer-statement reveal" data-delay="0">
+                    <p class="overline">O futuro da indústria.</p>
+                    <p class="footer-substatement">Começa agora.</p>
+                </div>
+                <div class="footer-nav-col reveal" data-delay="100">
+                    <h4 class="footer-mini-heading">Navegação</h4>
+                    <ul class="footer-mini-links">
+                        <li><a href="#hero">Home</a></li>
+                        <li><a href="#intro">Visão</a></li>
+                        <li><a href="#pillars">Pilares</a></li>
+                        <li><a href="#services">Serviços</a></li>
+                    </ul>
+                </div>
+                <div class="footer-nav-col reveal" data-delay="200">
+                    <h4 class="footer-mini-heading">Soluções</h4>
+                    <ul class="footer-mini-links">
+                        <li><a href="#services">Retrofits</a></li>
+                        <li><a href="#services">Chave na Mão</a></li>
+                        <li><a href="#services">Manutenção Preditiva</a></li>
+                        <li><a href="#contact">Contacto</a></li>
+                    </ul>
                 </div>
             </div>
-            <p class="footer-copyright">© 2026 Harker Intelligence</p>
+
+            <!-- Middle Section: Giant Logo -->
+            <div class="footer-middle reveal" data-delay="300">
+                <div class="giant-logo-wrapper">
+                    <img src="HSI_versao_simples.svg" alt="Harker Intelligence" class="giant-logo">
+                </div>
+            </div>
+
+            <!-- Bottom Section: Info + Legal -->
+            <div class="footer-bottom">
+                <div class="footer-brand">
+                    <img src="HSI_versao_simples.svg" alt="Harker Intelligence" class="footer-mini-logo">
+                    <span class="footer-copyright-text">© 2026 Harker Intelligence</span>
+                </div>
+                <div class="footer-legal-links">
+                    <a href="#" class="hover-underline">Privacy</a>
+                    <a href="#" class="hover-underline">Terms</a>
+                    <a href="mailto:geral@harkersolutions.com" class="hover-underline">Email</a>
+                </div>
+            </div>
         </div>
     </footer>
 
